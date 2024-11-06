@@ -1,0 +1,157 @@
+{
+  "projectVersion": 1,
+  "files": [
+    "..\\goingnative.apk"
+  ],
+  "treeExpansions": [
+    [
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "resources.arsc",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "res",
+      "resources.arsc",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "com.mobisec.gonative",
+      "Código fuente",
+      "goingnative.apk"
+    ],
+    [
+      "lib",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "armeabi-v7a",
+      "lib",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "x86",
+      "lib",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "x86_64",
+      "lib",
+      "Recursos",
+      "goingnative.apk"
+    ],
+    [
+      "arm64-v8a",
+      "lib",
+      "Recursos",
+      "goingnative.apk"
+    ]
+  ],
+  "codeData": {
+    "comments": [],
+    "renames": []
+  },
+  "openTabs": [
+    {
+      "type": "resource",
+      "tabPath": "AndroidManifest.xml",
+      "subPath": "",
+      "caret": 832,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "resource",
+      "tabPath": "res/values/strings.xml",
+      "subPath": "",
+      "caret": 0,
+      "view": {
+        "x": 0,
+        "y": 7
+      }
+    },
+    {
+      "type": "resource",
+      "tabPath": "res/values/styles.xml",
+      "subPath": "",
+      "caret": 0,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "resource",
+      "tabPath": "res/values/integers.xml",
+      "subPath": "",
+      "caret": 0,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "resource",
+      "tabPath": "res/values/dimens.xml",
+      "subPath": "",
+      "caret": 0,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "class",
+      "tabPath": "com.mobisec.gonative.BuildConfig",
+      "subPath": "java",
+      "caret": 84,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "class",
+      "tabPath": "com.mobisec.gonative.R",
+      "subPath": "java",
+      "caret": 84,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "class",
+      "tabPath": "com.mobisec.gonative.MainActivity",
+      "subPath": "java",
+      "caret": 2857,
+      "view": {
+        "x": 0,
+        "y": 599
+      }
+    },
+    {
+      "type": "class",
+      "tabPath": "com.mobisec.gonative.FlagChecker",
+      "subPath": "java",
+      "caret": 260,
+      "view": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "activeTab": 8,
+  "cacheDir": "..\\goingnative.apk.cache",
+  "enableLiveReload": false,
+  "searchHistory": []
+}

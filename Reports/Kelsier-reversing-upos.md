@@ -1,0 +1,23 @@
+# Solution
+
+## Description of the problem
+
+The upos challenge requires to inspect the contents of a builded apk to obtain the flag.
+
+## Solution
+
+First of all, I debugged the apk in Android Studio. Inside the app I obtained the resources, the manifest and the .dex files. In these files, I can see the bytecode of the classes in Smali. To facilitate me the work, I used an app (jadx) to translate the Smali code to Java code. There I found the FC class. In that class I found the method checkFlag that checks if the String passed as parameter is the correct flag. However, in this challenge, this funtion is more complicated than in other challenges. First of all, jadx is unable to load the contents, instead I obtain:
+
+ public static boolean checkFlag(android.content.Context r28, java.lang.String r29) {
+        /*
+            Method dump skipped, instructions count: 1371
+            To view this dump change 'Code comments level' option to 'DEBUG'
+        /
+        throw new UnsupportedOperationException("Method not decompiled: com.mobisec.upos.FC.checkFlag(android.content.Context, java.lang.String):boolean");
+    }
+
+If I observe the code comments I recive a lot of lines of native code. With this information I decided to open the contents of the .apk in Ghidra. In Ghidra I was able to observe the function checkFlag. First of all, this function calls the method lm(long[][] matrix) from the class FC. This function loads the contents of "lotto.dat" into the matrix passed as parameter. Then checkFlag() checks a lot of things and the results are stored in an array of booleans of length 200. It is checked that the flag starts with "MOBISEC{", that ends with "}", that the core starts with "this_is_", that the core ends with "upos", if the user is using Frida, if the signature of the app is the correct one... Other important things to keep in mind is that, for example, if Frida is running the app doesnt check the flag. After a while I discovered that the greatest part of these checks are useless. The important ones (related with the flag) are that the signature is correct and that it starts with "MOBISEC{" and ends with "}". For the result to be True, the function only checks from position 100 to 130 of the mentioned array and finally the hash (SHA-256) of the flag. I found that the lenght of the flag is 69 and therefore the core of the flag is of length 60. The core is divided in 30 blocks of two letters (the first two, then, the next two and so on). Each block is passed to the function r(String s) of FC and the result is passed to the function sq(String a) also from the FC class. This result is compared with a value of the matrix filled with "lotto.dat". But, with which one? The cell compared is: [iVar15 & 0xff] [(iVar14 & 0xff00) >> 8] being iVar15 and iVar14 the result of calling the method g2() to a Streamer object initialized at the begging of the function. If the two values are equals, the 100 + i value of the boolean array is not set to False. All over the checkFlag function, this streamer executes the funtion step() which modifies its values and therefore the result of the g2() function (the g2() function also calls the step() function, changing the values of the streamer). So, in order to obatain the flag I decided to perform a brute force attack. To achieve my goal of obtaining the flag I counted all the step() function calls from the streamer and I recreated the scenario in my own app in Android Studio (I had to add more steps() calls than the ones I counted at the beggining of the trials because I was not receiving any logical answer). After that, I recreated the same functionality that decides if the the 100 + i value of the boolean array is true and I tried all possible two character combinations until I found one that returned me true. At each character combination trial I had to restart the streamer to its previous state. I obtained this core: "Isnt_this_a_truly_evil_undebuggable_piece_of_sh^W_software??". After comparing the hash (SHA-256) of "MOBISEC{Isnt_this_a_truly_evil_undebuggable_piece_of_sh^W_software??}" with "4193d9b72a5c4805e9a5cc739f8a8fc23b2890e13b83bb887d96f86c30654a12" I receive True meaning that the flag is: "MOBISEC{Isnt_this_a_truly_evil_undebuggable_piece_of_sh^W_software??}".
+
+
+## Optional Feedback
+I think this challenge is very difficult. I had to read a lot of lines of code from the Ghidra decompiler, it wasn´t an easy task. After reading a lot of code I found that most of it was useless to find the key, adding more difficulty. 
